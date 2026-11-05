@@ -24,7 +24,11 @@ def retrieve_context(
         topic,
         normalize_embeddings=True
     ).tolist()
-
+    print("Collection:", collection.name)
+    print("Count:", collection.count())
+    print("Topic:", topic)
+    print("Course ID:", course_id)
+    print("Course ID type:", type(course_id))
     # 2. Retrieve relevant chunks from ChromaDB
     results = collection.query(
         query_embeddings=[query_embedding],
@@ -32,7 +36,9 @@ def retrieve_context(
         where={"course_id": course_id},
         include=["documents", "metadatas", "distances"]
     )
-
+    print("Documents:", results["documents"])
+    print("Distances:", results["distances"])
+    print("Metadata:", results["metadatas"])
     # 3. Handle empty results
     if not results["documents"] or not results["documents"][0]:
         return []

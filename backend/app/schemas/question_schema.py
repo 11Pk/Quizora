@@ -38,3 +38,11 @@ class Question(BaseModel):
 
 class QuestionResponse(BaseModel):
     questions: list[Question]
+    
+
+class GenerateQuestionsRequest(BaseModel):
+    course_id: str
+    topic: str
+    instructions: str = ""
+    question_config: QuestionConfig
+    learning_history: dict | None = None
